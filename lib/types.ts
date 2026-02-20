@@ -1,3 +1,22 @@
+export interface VegasOdds {
+  homeOdds: number;
+  awayOdds: number;
+  homeProbability: number;
+  awayProbability: number;
+}
+
+export interface CrowdOdds {
+  homeProbability: number;
+  awayProbability: number;
+  volume: number;
+}
+
+export interface Divergence {
+  home: number;  // crowd - vegas probability
+  away: number;
+  max: number;   // largest absolute divergence
+}
+
 export interface Game {
   id: string;
   sport: string;
@@ -5,21 +24,17 @@ export interface Game {
   awayTeam: string;
   gameTime: string;
 
-  // Vegas odds data
-  vegasHomeOdds: number;
-  vegasAwayOdds: number;
-  vegasHomeProbability: number;
-  vegasAwayProbability: number;
+  // ESPN game data
+  homeScore: string;
+  awayScore: string;
+  statusDescription: string;
+  statusState: string; // 'pre' | 'in' | 'post'
+  venue: string;
 
-  // Polymarket data
-  polymarketHomeProbability: number;
-  polymarketAwayProbability: number;
-  polymarketVolume: number;
-
-  // Divergence analysis
-  homeDivergence: number;
-  awayDivergence: number;
-  maxDivergence: number;
+  // Enrichment (undefined when no matching data source)
+  vegasOdds?: VegasOdds;
+  crowdOdds?: CrowdOdds;
+  divergence?: Divergence;
 
   // UI state
   isLive?: boolean;
@@ -34,6 +49,7 @@ export const TEAM_ABBREVIATIONS: Record<string, string> = {
   'Golden State Warriors': 'GSW',
   'Boston Celtics': 'BOS',
   'Los Angeles Clippers': 'LAC',
+  'LA Clippers': 'LAC',
   'Denver Nuggets': 'DEN',
   'Los Angeles Lakers': 'LAL',
   'Phoenix Suns': 'PHX',
@@ -42,6 +58,16 @@ export const TEAM_ABBREVIATIONS: Record<string, string> = {
   'Memphis Grizzlies': 'MEM',
   'Portland Trail Blazers': 'POR',
   'Atlanta Hawks': 'ATL',
+  'Philadelphia 76ers': 'PHI',
+  'Cleveland Cavaliers': 'CLE',
+  'Brooklyn Nets': 'BKN',
+  'Indiana Pacers': 'IND',
+  'Washington Wizards': 'WSH',
+  'Detroit Pistons': 'DET',
+  'Utah Jazz': 'UTAH',
+  'Miami Heat': 'MIA',
+  'Dallas Mavericks': 'DAL',
+  'New Orleans Pelicans': 'NOP',
   'Buffalo Bills': 'BUF',
   'Kansas City Chiefs': 'KC',
   'Toronto Maple Leafs': 'TOR',

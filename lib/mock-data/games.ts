@@ -1,5 +1,16 @@
+import { mockEspnResponse } from './espn';
 import { mockOddsApiResponse } from './odds-api';
 import { mockPolymarketResponse } from './polymarket';
+import type { Game, VegasOdds, CrowdOdds, Divergence } from '../types';
+
+// ESPN uses "LA Clippers" while Odds API / Polymarket use "Los Angeles Clippers"
+const TEAM_NAME_ALIASES: Record<string, string> = {
+  'LA Clippers': 'Los Angeles Clippers',
+};
+
+function normalizeTeamName(name: string): string {
+  return TEAM_NAME_ALIASES[name] ?? name;
+}
 
 // Helper function to convert decimal odds to implied probability
 function decimalOddsToImpliedProbability(odds: number): number {
@@ -7,90 +18,101 @@ function decimalOddsToImpliedProbability(odds: number): number {
 }
 
 // Helper function to get average odds across bookmakers
-function getAverageOdds(bookmakers: any[], teamName: string): number {
+function getAverageOdds(bookmakers: typeof mockOddsApiResponse[0]['bookmakers'], teamName: string): number {
   const allOdds = bookmakers.flatMap(bookmaker =>
     bookmaker.markets[0].outcomes
-      .filter((outcome: any) => outcome.name === teamName)
-      .map((outcome: any) => outcome.price)
+      .filter((outcome) => outcome.name === teamName)
+      .map((outcome) => outcome.price)
   );
 
   if (allOdds.length === 0) return 0;
   return allOdds.reduce((sum, odds) => sum + odds, 0) / allOdds.length;
 }
 
-export interface Game {
-  id: string;
-  sport: string;
-  homeTeam: string;
-  awayTeam: string;
-  gameTime: string;
+// ESPN is the source of truth for all games.
+// Odds API and Polymarket data enrich ESPN games when a matching game is found.
+export const mockGames: Game[] = mockEspnResponse.map(espnEvent => {
+  const competition = espnEvent.competitions[0];
+  const homeCompetitor = competition.competitors.find(c => c.homeAway === 'home')!;
+  const awayCompetitor = competition.competitors.find(c => c.homeAway === 'away')!;
 
-  // Vegas odds data
-  vegasHomeOdds: number;
-  vegasAwayOdds: number;
-  vegasHomeProbability: number;
-  vegasAwayProbability: number;
+  const homeTeam = homeCompetitor.team.displayName;
+  const awayTeam = awayCompetitor.team.displayName;
 
-  // Polymarket data
-  polymarketHomeProbability: number;
-  polymarketAwayProbability: number;
-  polymarketVolume: number;
+  // Normalize team names for matching against Odds API / Polymarket
+  const homeNorm = normalizeTeamName(homeTeam);
+  const awayNorm = normalizeTeamName(awayTeam);
 
-  // Divergence analysis
-  homeDivergence: number; // difference in probability (Polymarket - Vegas)
-  awayDivergence: number;
-  maxDivergence: number;  // largest absolute divergence for sorting
-}
-
-// Convert raw API data into our standardized Game format
-export const mockGames: Game[] = mockOddsApiResponse.map(oddsGame => {
-  // Find corresponding Polymarket data
-  const polyGame = mockPolymarketResponse.find(pg =>
-    pg.teams.home === oddsGame.home_team &&
-    pg.teams.away === oddsGame.away_team
+  // Find corresponding Odds API data (match on normalized team names)
+  const oddsGame = mockOddsApiResponse.find(og =>
+    og.home_team === homeNorm && og.away_team === awayNorm
   );
 
-  // Calculate average Vegas odds
-  const homeOdds = getAverageOdds(oddsGame.bookmakers, oddsGame.home_team);
-  const awayOdds = getAverageOdds(oddsGame.bookmakers, oddsGame.away_team);
+  // Find corresponding Polymarket data (match on normalized team names)
+  const polyGame = mockPolymarketResponse.find(pg =>
+    pg.teams.home === homeNorm && pg.teams.away === awayNorm
+  );
 
-  // Convert to probabilities
-  const vegasHomeProbability = homeOdds > 0 ? decimalOddsToImpliedProbability(homeOdds) : 0;
-  const vegasAwayProbability = awayOdds > 0 ? decimalOddsToImpliedProbability(awayOdds) : 0;
+  // Build vegasOdds (undefined when no Odds API match)
+  let vegasOdds: VegasOdds | undefined;
+  if (oddsGame) {
+    const homeOdds = getAverageOdds(oddsGame.bookmakers, homeNorm);
+    const awayOdds = getAverageOdds(oddsGame.bookmakers, awayNorm);
+    vegasOdds = {
+      homeOdds,
+      awayOdds,
+      homeProbability: homeOdds > 0 ? decimalOddsToImpliedProbability(homeOdds) : 0,
+      awayProbability: awayOdds > 0 ? decimalOddsToImpliedProbability(awayOdds) : 0,
+    };
+  }
 
-  // Get Polymarket probabilities (default to Vegas if no Polymarket data)
-  const polymarketHomeProbability = polyGame ? polyGame.outcome_prices[oddsGame.home_team] || vegasHomeProbability : vegasHomeProbability;
-  const polymarketAwayProbability = polyGame ? polyGame.outcome_prices[oddsGame.away_team] || vegasAwayProbability : vegasAwayProbability;
+  // Build crowdOdds (undefined when no Polymarket match)
+  let crowdOdds: CrowdOdds | undefined;
+  if (polyGame) {
+    crowdOdds = {
+      homeProbability: polyGame.outcome_prices[homeNorm] ?? 0,
+      awayProbability: polyGame.outcome_prices[awayNorm] ?? 0,
+      volume: polyGame.volume,
+    };
+  }
 
-  // Calculate divergences
-  const homeDivergence = polymarketHomeProbability - vegasHomeProbability;
-  const awayDivergence = polymarketAwayProbability - vegasAwayProbability;
-  const maxDivergence = Math.max(Math.abs(homeDivergence), Math.abs(awayDivergence));
+  // Build divergence (only when both sources are present)
+  let divergence: Divergence | undefined;
+  if (vegasOdds && crowdOdds) {
+    const home = crowdOdds.homeProbability - vegasOdds.homeProbability;
+    const away = crowdOdds.awayProbability - vegasOdds.awayProbability;
+    divergence = {
+      home,
+      away,
+      max: Math.max(Math.abs(home), Math.abs(away)),
+    };
+  }
 
   return {
-    id: oddsGame.id,
-    sport: oddsGame.sport_title,
-    homeTeam: oddsGame.home_team,
-    awayTeam: oddsGame.away_team,
-    gameTime: oddsGame.commence_time,
+    id: espnEvent.id,
+    sport: 'NBA',
+    homeTeam,
+    awayTeam,
+    gameTime: espnEvent.date,
 
-    vegasHomeOdds: homeOdds,
-    vegasAwayOdds: awayOdds,
-    vegasHomeProbability,
-    vegasAwayProbability,
+    // ESPN fields
+    homeScore: homeCompetitor.score,
+    awayScore: awayCompetitor.score,
+    statusDescription: espnEvent.status.type.description,
+    statusState: espnEvent.status.type.state,
+    venue: competition.venue.fullName,
 
-    polymarketHomeProbability,
-    polymarketAwayProbability,
-    polymarketVolume: polyGame?.volume || 0,
-
-    homeDivergence,
-    awayDivergence,
-    maxDivergence
+    // Enrichment
+    vegasOdds,
+    crowdOdds,
+    divergence,
   };
 });
 
 // Sort by divergence (highest first) for easy identification of opportunities
-export const mockGamesByDivergence = [...mockGames].sort((a, b) => b.maxDivergence - a.maxDivergence);
+export const mockGamesByDivergence = [...mockGames].sort(
+  (a, b) => (b.divergence?.max ?? 0) - (a.divergence?.max ?? 0)
+);
 
 // Helper function to format probability as percentage
 export const formatProbability = (prob: number): string => `${(prob * 100).toFixed(1)}%`;

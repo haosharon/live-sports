@@ -1,26 +1,56 @@
 import { mockGames, formatProbability, formatDivergence } from '../games';
 
 describe('Mock Games Data', () => {
-  test('should have games with required properties', () => {
-    expect(mockGames).toHaveLength(4);
+  test('should have games derived from ESPN data', () => {
+    expect(mockGames.length).toBeGreaterThan(0);
 
     const game = mockGames[0];
+    // Core fields
     expect(game).toHaveProperty('id');
     expect(game).toHaveProperty('sport');
     expect(game).toHaveProperty('homeTeam');
     expect(game).toHaveProperty('awayTeam');
     expect(game).toHaveProperty('gameTime');
-    expect(game).toHaveProperty('vegasHomeProbability');
-    expect(game).toHaveProperty('polymarketHomeProbability');
-    expect(game).toHaveProperty('maxDivergence');
+
+    // ESPN fields
+    expect(game).toHaveProperty('homeScore');
+    expect(game).toHaveProperty('awayScore');
+    expect(game).toHaveProperty('statusDescription');
+    expect(game).toHaveProperty('statusState');
+    expect(game).toHaveProperty('venue');
+
+    // Enrichment fields are optional nested objects
+    // vegasOdds, crowdOdds, divergence may be undefined
   });
 
-  test('should calculate probabilities correctly', () => {
+  test('all games should have sport set to NBA', () => {
     mockGames.forEach(game => {
-      expect(game.vegasHomeProbability).toBeGreaterThan(0);
-      expect(game.vegasAwayProbability).toBeGreaterThan(0);
-      expect(game.polymarketHomeProbability).toBeGreaterThan(0);
-      expect(game.polymarketAwayProbability).toBeGreaterThan(0);
+      expect(game.sport).toBe('NBA');
+    });
+  });
+
+  test('enrichment fields should have valid probabilities when present', () => {
+    mockGames.forEach(game => {
+      if (game.vegasOdds) {
+        expect(game.vegasOdds.homeProbability).toBeGreaterThanOrEqual(0);
+        expect(game.vegasOdds.awayProbability).toBeGreaterThanOrEqual(0);
+      }
+      if (game.crowdOdds) {
+        expect(game.crowdOdds.homeProbability).toBeGreaterThanOrEqual(0);
+        expect(game.crowdOdds.awayProbability).toBeGreaterThanOrEqual(0);
+      }
+    });
+  });
+
+  test('divergence should only exist when both sources are present', () => {
+    mockGames.forEach(game => {
+      if (!game.vegasOdds || !game.crowdOdds) {
+        expect(game.divergence).toBeUndefined();
+      }
+      if (game.divergence) {
+        expect(game.vegasOdds).toBeDefined();
+        expect(game.crowdOdds).toBeDefined();
+      }
     });
   });
 });
