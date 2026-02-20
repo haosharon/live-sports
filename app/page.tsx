@@ -1,16 +1,39 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useMemo } from 'react';
+import Header from '@/components/Header';
+import SummaryCard from '@/components/SummaryCard';
+import SportFilter from '@/components/SportFilter';
+import GameList from '@/components/GameList';
+import { mockGames } from '@/lib/mock-data/games';
+import { SportKey, Game } from '@/lib/types';
+
+// Enrich mock data with isLive flag and ensure some divergences show for the skeleton
+function enrichMockGames(games: Game[]): Game[] {
+  return games.map((game, index) => ({
+    ...game,
+    // Mark the first game as live to match the mock design
+    isLive: index === 0,
+  }));
+}
 
 export default function Home() {
+  const [selectedSport, setSelectedSport] = useState<SportKey>('All');
+
+  const enrichedGames = useMemo(() => enrichMockGames(mockGames), []);
+
+  const filteredGames = selectedSport === 'All'
+    ? enrichedGames
+    : enrichedGames.filter(g => g.sport === selectedSport);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-black dark:text-white">
-          Hello World!
-        </h1>
-        <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-          Your Next.js dev server is working correctly.
-        </p>
-      </main>
+    <div className="mx-auto min-h-screen max-w-md bg-black font-sans">
+      <Header />
+      <div className="mt-2">
+        <SummaryCard games={filteredGames} />
+      </div>
+      <SportFilter selected={selectedSport} onSelect={setSelectedSport} />
+      <GameList games={filteredGames} />
     </div>
   );
 }
