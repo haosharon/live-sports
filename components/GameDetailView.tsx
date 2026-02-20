@@ -33,12 +33,16 @@ function SportBadge({ sport, isLive }: { sport: string; isLive?: boolean }) {
 
 // Convert decimal odds to American odds for display
 function decimalToAmerican(decimalOdds: number): string {
+  if (!isFinite(decimalOdds) || decimalOdds <= 1.0) {
+    return 'N/A';
+  }
   if (decimalOdds >= 2.0) {
     const american = Math.round((decimalOdds - 1) * 100);
     return `+${american}`;
   } else {
+    // Result is already negative, no need to prepend another minus sign
     const american = Math.round(-100 / (decimalOdds - 1));
-    return `-${american}`;
+    return `${american}`;
   }
 }
 
