@@ -59,8 +59,8 @@ export const mockGames: Game[] = mockOddsApiResponse.map(oddsGame => {
   const vegasAwayProbability = awayOdds > 0 ? decimalOddsToImpliedProbability(awayOdds) : 0;
 
   // Get Polymarket probabilities (default to Vegas if no Polymarket data)
-  const polymarketHomeProbability = polyGame ? polyGame.outcome_prices[oddsGame.home_team] : vegasHomeProbability;
-  const polymarketAwayProbability = polyGame ? polyGame.outcome_prices[oddsGame.away_team] : vegasAwayProbability;
+  const polymarketHomeProbability = polyGame ? polyGame.outcome_prices[oddsGame.home_team] || vegasHomeProbability : vegasHomeProbability;
+  const polymarketAwayProbability = polyGame ? polyGame.outcome_prices[oddsGame.away_team] || vegasAwayProbability : vegasAwayProbability;
 
   // Calculate divergences
   const homeDivergence = polymarketHomeProbability - vegasHomeProbability;
