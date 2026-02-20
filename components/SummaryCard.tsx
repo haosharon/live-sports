@@ -13,7 +13,7 @@ export default function SummaryCard({ games }: SummaryCardProps) {
 
   return (
     <div className="mx-4 rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3">
-      <p className="text-sm text-zinc-400">Games with edges today</p>
+      <p className="text-sm text-zinc-400">Upcoming games with edges</p>
       <div className="mt-1 flex items-baseline gap-1">
         <span className="text-3xl font-bold text-white">{gamesWithEdges}</span>
         <span className="text-sm text-zinc-400">of {totalGames} total matchups</span>
