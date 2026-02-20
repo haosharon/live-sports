@@ -115,7 +115,7 @@ export const mockGames = [
   });
 ```
 - [x] Create `app/manifest.ts` (basic config)
-- [ ] Add placeholder icons to `public/icons/`
+- [x] Add placeholder icons to `public/icons/`
 - [x] Deploy and test "Add to Home Screen" on iPhone
 - [x] **Why now**: See real mobile experience early, informs remaining design
 
