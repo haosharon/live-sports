@@ -3,32 +3,32 @@
 ## Timeline: 4-4.5 hours
 
 ## Phase 1: Basic Setup (30 min)
-**Status**: IN PROGRESS
+**Status**: COMPLETED
 
 ### 1.1 Initial Setup (10 min)
 - [x] Create Next.js app with TypeScript
-- [ ] Install dependencies (next-pwa, swr, lucide-react)
+- [x] Install dependencies (next-pwa, swr, lucide-react)
 ```
   npm install next-pwa swr lucide-react
 ```
-- [ ] Test dev server runs (`npm run dev`)
+- [x] Test dev server runs (`npm run dev`)
 
 ### 1.2 Deploy to Vercel (10 min)
-- [ ] Push current code to GitHub
-- [ ] Go to vercel.com and connect GitHub repo
-- [ ] Deploy (takes ~2 min)
-- [ ] Test production URL on phone
-- [ ] **Why now?**: Continuous deployment = see changes on real phone immediately
+- [x] Push current code to GitHub
+- [x] Go to vercel.com and connect GitHub repo
+- [x] Deploy (takes ~2 min)
+- [x] Test production URL on phone
+- [x] **Why now?**: Continuous deployment = see changes on real phone immediately
 
 ### 1.3 Get API Keys (10 min)
-- [ ] Sign up at https://the-odds-api.com/ → Get API key
+- [x] Sign up at https://the-odds-api.com/ → Get API key
 - [ ] (Optional) Sign up at https://console.anthropic.com/ → Get Claude API key
-- [ ] Create `.env.local` file in project root:
+- [x] Create `.env.local` file in project root:
 ```
 ODDS_API_KEY=your_key_here
 ANTHROPIC_API_KEY=your_key_here
 ```
-- [ ] Add same keys to Vercel dashboard (Settings → Environment Variables)
+- [x] Add same keys to Vercel dashboard (Settings → Environment Variables)
 - [ ] **Note**: Polymarket API needs no key!
 
 ## Phase 2: Explore APIs & Create Mock Data (45 min)
@@ -101,23 +101,23 @@ export const mockGames = [
 **Goal**: Validate the data structure makes sense before building real API integration
 
 ## Phase 4: PWA Setup (20 min)
-**Status**: NOT STARTED
+**Status**: COMPLETED
 
-- [ ] Configure `next.config.js` with next-pwa
+- [x] Configure `next.config.js` with next-pwa
 ```javascript
   const withPWA = require('next-pwa')({
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
   });
-  
+
   module.exports = withPWA({
     reactStrictMode: true,
   });
 ```
-- [ ] Create `app/manifest.ts` (basic config)
+- [x] Create `app/manifest.ts` (basic config)
 - [ ] Add placeholder icons to `public/icons/`
-- [ ] Deploy and test "Add to Home Screen" on iPhone
-- [ ] **Why now**: See real mobile experience early, informs remaining design
+- [x] Deploy and test "Add to Home Screen" on iPhone
+- [x] **Why now**: See real mobile experience early, informs remaining design
 
 ## Phase 5: Build Data Layer / Backend (60 min)
 **Status**: NOT STARTED
