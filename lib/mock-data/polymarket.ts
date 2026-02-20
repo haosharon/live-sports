@@ -18,7 +18,7 @@ export const mockPolymarketResponse = [
     "outcome_prices": {
       "Houston Rockets": 0.88,  // 88% probability
       "Atlanta Hawks": 0.12     // 12% probability
-    },
+    } as Record<string, number>,
     "markets": [
       {
         "id": "619835",
@@ -49,7 +49,7 @@ export const mockPolymarketResponse = [
     "outcome_prices": {
       "New York Knicks": 0.72,      // 72% probability - crowd bullish on Knicks
       "Minnesota Timberwolves": 0.28  // 28% probability
-    },
+    } as Record<string, number>,
     "markets": [
       {
         "id": "624297",
@@ -80,7 +80,7 @@ export const mockPolymarketResponse = [
     "outcome_prices": {
       "Boston Celtics": 0.85,     // 85% probability - crowd very confident in Celtics
       "Memphis Grizzlies": 0.15   // 15% probability
-    },
+    } as Record<string, number>,
     "markets": [
       {
         "id": "622861",
@@ -111,7 +111,7 @@ export const mockPolymarketResponse = [
     "outcome_prices": {
       "Golden State Warriors": 0.78,   // 78% probability
       "Portland Trail Blazers": 0.22   // 22% probability
-    },
+    } as Record<string, number>,
     "markets": [
       {
         "id": "622884",
