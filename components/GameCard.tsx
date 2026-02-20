@@ -1,6 +1,7 @@
 'use client';
 
 import { Game, getTeamAbbreviation, SPORT_COLORS, DIVERGENCE_GAP_THRESHOLD } from '@/lib/types';
+import { getLocalDateLabel, getLocalTimeLabel } from '@/lib/date-utils';
 
 interface GameCardProps {
   game: Game;
@@ -21,35 +22,9 @@ function SportIcon({ sport }: { sport: string }) {
   );
 }
 
-function formatGameTime(gameTime: string): { dateLabel: string; timeLabel: string } {
-  const date = new Date(gameTime);
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const gameDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-  let dateLabel: string;
-  if (gameDate.getTime() === today.getTime()) {
-    dateLabel = 'Today';
-  } else if (gameDate.getTime() === tomorrow.getTime()) {
-    dateLabel = 'Tomorrow';
-  } else {
-    dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  }
-
-  const timeLabel = date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'America/New_York',
-    timeZoneName: 'short',
-  });
-
-  return { dateLabel, timeLabel };
-}
-
 export default function GameCard({ game }: GameCardProps) {
-  const { dateLabel, timeLabel } = formatGameTime(game.gameTime);
+  const dateLabel = getLocalDateLabel(game.gameTime);
+  const timeLabel = getLocalTimeLabel(game.gameTime);
   const gapPercent = (game.maxDivergence * 100).toFixed(1);
   const showGap = game.maxDivergence >= DIVERGENCE_GAP_THRESHOLD;
 

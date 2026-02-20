@@ -1,6 +1,7 @@
 'use client';
 
 import { Game } from '@/lib/types';
+import { getLocalDateGroupLabel } from '@/lib/date-utils';
 import GameCard from './GameCard';
 
 interface GameListProps {
@@ -13,25 +14,10 @@ interface DateGroup {
 }
 
 function groupByDate(games: Game[]): DateGroup[] {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
   const groups: Map<string, Game[]> = new Map();
 
   for (const game of games) {
-    const date = new Date(game.gameTime);
-    const gameDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-    let label: string;
-    if (gameDate.getTime() === today.getTime()) {
-      label = 'TODAY';
-    } else if (gameDate.getTime() === tomorrow.getTime()) {
-      label = 'TOMORROW';
-    } else {
-      label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
-    }
+    const label = getLocalDateGroupLabel(game.gameTime);
 
     if (!groups.has(label)) {
       groups.set(label, []);
@@ -39,7 +25,7 @@ function groupByDate(games: Game[]): DateGroup[] {
     groups.get(label)!.push(game);
   }
 
-  return Array.from(groups.entries()).map(([label, games]) => ({ label, games }));
+  return Array.from(groups.entries()).map(([label, dateGames]) => ({ label, games: dateGames }));
 }
 
 export default function GameList({ games }: GameListProps) {
