@@ -1,0 +1,81 @@
+# Project Rules for AI Coding Assistants
+
+## Project Context
+This is a Next.js 14 sports betting odds analyzer. See CLAUDE.md for full context.
+
+## Code Generation Rules
+1. Always use TypeScript with proper types
+2. Use Next.js App Router patterns (not Pages Router)
+3. Use Tailwind CSS for all styling (no CSS modules)
+4. Use SWR for data fetching (already installed)
+5. Make all API routes cache responses for 60 seconds
+6. Handle loading and error states in all components
+7. Mobile-first responsive design (test at 375px width first)
+
+## File Patterns
+- API routes: `app/api/[name]/route.ts`
+- Pages: `app/[name]/page.tsx`
+- Components: `components/[ComponentName].tsx`
+- Utilities: `lib/[utility-name].ts`
+
+## Import Preferences
+```typescript
+// Use named imports
+import { useState, useEffect } from 'react';
+
+// Use @/ alias for internal imports
+import { GameCard } from '@/components/GameCard';
+import { convertOdds } from '@/lib/odds-converter';
+```
+
+## Common Patterns
+
+### API Routes
+```typescript
+export async function GET(request: Request) {
+  try {
+    // Fetch data
+    // Cache for 60 seconds
+    // Return JSON
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Descriptive error message' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+### Components
+```typescript
+interface Props {
+  // Always define prop types
+}
+
+export function ComponentName({ prop }: Props) {
+  // Use hooks
+  // Return JSX with Tailwind classes
+}
+```
+
+## Don't Do This
+- ❌ Don't use Pages Router patterns
+- ❌ Don't use CSS modules or styled-components
+- ❌ Don't make API calls without caching
+- ❌ Don't ignore TypeScript errors
+- ❌ Don't use default exports for components
+- ❌ Don't make components that do too much
+
+## Do This
+- ✅ Use "use client" directive when using hooks
+- ✅ Add loading states for all async operations
+- ✅ Handle edge cases (missing data, API failures)
+- ✅ Test on mobile viewport
+- ✅ Keep components under 150 lines
+- ✅ Add comments for complex logic
+
+## When Generating Code
+1. Ask clarifying questions if requirements are ambiguous
+2. Show me the code structure first before implementing
+3. Explain tradeoffs when there are multiple approaches
+4. Point out potential issues or edge cases
