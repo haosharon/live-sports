@@ -1,6 +1,6 @@
 'use client';
 
-import { Game, getTeamAbbreviation, SPORT_COLORS } from '@/lib/types';
+import { Game, getTeamAbbreviation, SPORT_COLORS, DIVERGENCE_GAP_THRESHOLD } from '@/lib/types';
 
 interface GameCardProps {
   game: Game;
@@ -51,7 +51,7 @@ function formatGameTime(gameTime: string): { dateLabel: string; timeLabel: strin
 export default function GameCard({ game }: GameCardProps) {
   const { dateLabel, timeLabel } = formatGameTime(game.gameTime);
   const gapPercent = (game.maxDivergence * 100).toFixed(1);
-  const showGap = game.maxDivergence >= 0.05;
+  const showGap = game.maxDivergence >= DIVERGENCE_GAP_THRESHOLD;
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">

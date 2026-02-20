@@ -56,6 +56,9 @@ export function getTeamAbbreviation(teamName: string): string {
   return TEAM_ABBREVIATIONS[teamName] || teamName.substring(0, 3).toUpperCase();
 }
 
+// Minimum divergence to display a gap badge
+export const DIVERGENCE_GAP_THRESHOLD = 0.05;
+
 // Sport icon colors
 export const SPORT_COLORS: Record<string, string> = {
   'NBA': '#f97316',

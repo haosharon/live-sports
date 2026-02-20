@@ -1,13 +1,13 @@
 'use client';
 
-import { Game } from '@/lib/types';
+import { Game, DIVERGENCE_GAP_THRESHOLD } from '@/lib/types';
 
 interface SummaryCardProps {
   games: Game[];
 }
 
 export default function SummaryCard({ games }: SummaryCardProps) {
-  const gamesWithEdges = games.filter(g => g.maxDivergence >= 0.05).length;
+  const gamesWithEdges = games.filter(g => g.maxDivergence >= DIVERGENCE_GAP_THRESHOLD).length;
   const totalGames = games.length;
   const progress = totalGames > 0 ? (gamesWithEdges / totalGames) * 100 : 0;
 
