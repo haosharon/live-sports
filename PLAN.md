@@ -22,42 +22,45 @@
 
 ### 1.3 Get API Keys (10 min)
 - [x] Sign up at https://the-odds-api.com/ → Get API key
-- [ ] (Optional) Sign up at https://console.anthropic.com/ → Get Claude API key
+- [x] (Optional) Sign up at https://console.anthropic.com/ → Get Claude API key
 - [x] Create `.env.local` file in project root:
 ```
 ODDS_API_KEY=your_key_here
 ANTHROPIC_API_KEY=your_key_here
 ```
 - [x] Add same keys to Vercel dashboard (Settings → Environment Variables)
-- [ ] **Note**: Polymarket API needs no key!
+- [x] **Note**: Polymarket API needs no key!
 
 ## Phase 2: Explore APIs & Create Mock Data (45 min)
-**Status**: NOT STARTED
+**Status**: COMPLETED
 
 ### 2.1 Explore The Odds API (15 min)
-- [ ] Read docs: https://the-odds-api.com/liveapi/guides/v4/
-- [ ] Test endpoint in browser or Postman:
+- [x] Read docs: https://the-odds-api.com/liveapi/guides/v4/
+- [x] Test endpoint in browser or Postman:
 ```
 https://api.the-odds-api.com/v4/sports/basketball_nba/odds?apiKey=YOUR_KEY&regions=us&markets=h2h
 ```
-- [ ] Save a few real responses to understand data shape
-- [ ] **Goal**: Understand what fields are available, team name formats
+- [x] Save a few real responses to understand data shape
+- [x] **Goal**: Understand what fields are available, team name formats
 
 ### 2.2 Explore Polymarket API (15 min)
-- [ ] Read docs: https://docs.polymarket.com/quickstart/fetching-data
-- [ ] Test endpoint in browser:
+- [x] Read docs: https://docs.polymarket.com/quickstart/fetching-data
+- [x] Test endpoint in browser:
 ```
 https://gamma-api.polymarket.com/events?series_id=10345&active=true
 ```
-- [ ] Save a few real responses
-- [ ] **Goal**: Understand data structure, how to find sports games
+- [x] Save a few real responses
+- [x] **Goal**: Understand data structure, how to find sports games
 
 ### 2.3 Create Mock Data File (15 min)
-- [ ] Create `lib/mock-data.ts`
-- [ ] Add 3-4 fake games with realistic data structure
-- [ ] Include both traditional odds and prediction market probabilities
-- [ ] Include a game with big divergence, one with small divergence
-- [ ] **Why**: Avoid hitting API rate limits during UI development
+- [x] Create `lib/mock-data/` directory structure
+- [x] Create `lib/mock-data/odds-api.ts` with real Odds API response data
+- [x] Create `lib/mock-data/polymarket.ts` with real Polymarket API response data
+- [x] Create `lib/mock-data/games.ts` with combined data structure and utility functions
+- [x] Add 4 NBA games with realistic data structure
+- [x] Include both traditional odds and prediction market probabilities
+- [x] Include games with varying divergences for testing
+- [x] **Why**: Avoid hitting API rate limits during UI development
 
 **Example mock data structure:**
 ```
@@ -236,7 +239,7 @@ If time permits:
 None
 
 ## Next Steps
-Start Phase 2: Build the data layer utilities and API routes
+Start Phase 3: Build the barebones UI with mock data (GameCard component and basic list page)
 
 ## Notes
 - Keep The Odds API calls minimal during development (500/month limit)
