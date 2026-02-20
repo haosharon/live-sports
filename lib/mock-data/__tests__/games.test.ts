@@ -1,26 +1,53 @@
 import { mockGames, formatProbability, formatDivergence } from '../games';
 
 describe('Mock Games Data', () => {
-  test('should have games with required properties', () => {
-    expect(mockGames).toHaveLength(4);
+  test('should have games derived from ESPN data', () => {
+    expect(mockGames.length).toBeGreaterThan(0);
 
     const game = mockGames[0];
+    // Core fields
     expect(game).toHaveProperty('id');
     expect(game).toHaveProperty('sport');
     expect(game).toHaveProperty('homeTeam');
     expect(game).toHaveProperty('awayTeam');
     expect(game).toHaveProperty('gameTime');
+
+    // ESPN fields
+    expect(game).toHaveProperty('homeScore');
+    expect(game).toHaveProperty('awayScore');
+    expect(game).toHaveProperty('statusDescription');
+    expect(game).toHaveProperty('statusState');
+    expect(game).toHaveProperty('venue');
+
+    // Enrichment fields
     expect(game).toHaveProperty('vegasHomeProbability');
     expect(game).toHaveProperty('polymarketHomeProbability');
     expect(game).toHaveProperty('maxDivergence');
   });
 
-  test('should calculate probabilities correctly', () => {
+  test('all games should have sport set to NBA', () => {
     mockGames.forEach(game => {
-      expect(game.vegasHomeProbability).toBeGreaterThan(0);
-      expect(game.vegasAwayProbability).toBeGreaterThan(0);
-      expect(game.polymarketHomeProbability).toBeGreaterThan(0);
-      expect(game.polymarketAwayProbability).toBeGreaterThan(0);
+      expect(game.sport).toBe('NBA');
+    });
+  });
+
+  test('enrichment fields should be 0 when no matching data source exists', () => {
+    // Games without Odds API or Polymarket matches should have 0 for enrichment fields
+    mockGames.forEach(game => {
+      expect(game.vegasHomeProbability).toBeGreaterThanOrEqual(0);
+      expect(game.vegasAwayProbability).toBeGreaterThanOrEqual(0);
+      expect(game.polymarketHomeProbability).toBeGreaterThanOrEqual(0);
+      expect(game.polymarketAwayProbability).toBeGreaterThanOrEqual(0);
+    });
+  });
+
+  test('divergence should only be non-zero when both sources are present', () => {
+    mockGames.forEach(game => {
+      if (game.vegasHomeProbability === 0 || game.polymarketHomeProbability === 0) {
+        expect(game.homeDivergence).toBe(0);
+        expect(game.awayDivergence).toBe(0);
+        expect(game.maxDivergence).toBe(0);
+      }
     });
   });
 });

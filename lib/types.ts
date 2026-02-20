@@ -5,13 +5,20 @@ export interface Game {
   awayTeam: string;
   gameTime: string;
 
-  // Vegas odds data
+  // ESPN game data
+  homeScore: string;
+  awayScore: string;
+  statusDescription: string;
+  statusState: string; // 'pre' | 'in' | 'post'
+  venue: string;
+
+  // Vegas odds data (enrichment — 0 if no match)
   vegasHomeOdds: number;
   vegasAwayOdds: number;
   vegasHomeProbability: number;
   vegasAwayProbability: number;
 
-  // Polymarket data
+  // Polymarket data (enrichment — 0 if no match)
   polymarketHomeProbability: number;
   polymarketAwayProbability: number;
   polymarketVolume: number;
