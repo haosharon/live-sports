@@ -26,8 +26,8 @@ function SportIcon({ sport }: { sport: string }) {
 export default function GameCard({ game }: GameCardProps) {
   const dateLabel = getLocalDateLabel(game.gameTime);
   const timeLabel = getLocalTimeLabel(game.gameTime);
-  const gapPercent = (game.maxDivergence * 100).toFixed(1);
-  const showGap = game.maxDivergence >= DIVERGENCE_GAP_THRESHOLD;
+  const gapPercent = ((game.divergence?.max ?? 0) * 100).toFixed(1);
+  const showGap = (game.divergence?.max ?? 0) >= DIVERGENCE_GAP_THRESHOLD;
 
   return (
     <Link href={`/games/${game.id}`} className="block">

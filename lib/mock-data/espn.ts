@@ -1,14 +1,14 @@
-// Real data from ESPN Scoreboard API
-// Fetched from: http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20250219-20250226
+// Real data from ESPN Scoreboard API (NBA 2026)
+// Fetched from: http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260219-20260226
 export const mockEspnResponse = [
   {
-    "id": "401748704",
-    "date": "2025-02-20T03:00Z",
-    "name": "Charlotte Hornets at Los Angeles Lakers",
-    "shortName": "CHA @ LAL",
+    "id": "401810647",
+    "date": "2026-02-20T00:00Z",
+    "name": "Houston Rockets at Charlotte Hornets",
+    "shortName": "HOU @ CHA",
     "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
+      "clock": 720.0,
+      "displayClock": "12:00",
       "period": 4,
       "type": {
         "id": "3",
@@ -22,31 +22,20 @@ export const mockEspnResponse = [
     },
     "competitions": [
       {
-        "id": "401748704",
-        "date": "2025-02-20T03:00Z",
-        "attendance": 18997,
+        "id": "401810647",
+        "date": "2026-02-20T00:00Z",
+        "attendance": 19622,
         "venue": {
-          "id": "1841",
-          "fullName": "crypto.com Arena",
-          "address": { "city": "Los Angeles", "state": "CA" }
+          "id": "1893",
+          "fullName": "Spectrum Center",
+          "address": {
+            "city": "Charlotte",
+            "state": "NC"
+          }
         },
         "competitors": [
           {
             "homeAway": "home",
-            "team": {
-              "id": "13",
-              "displayName": "Los Angeles Lakers",
-              "abbreviation": "LAL",
-              "name": "Lakers",
-              "location": "Los Angeles",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/lal.png",
-              "color": "552583"
-            },
-            "score": "97",
-            "winner": false
-          },
-          {
-            "homeAway": "away",
             "team": {
               "id": "30",
               "displayName": "Charlotte Hornets",
@@ -56,7 +45,21 @@ export const mockEspnResponse = [
               "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cha.png",
               "color": "008ca8"
             },
-            "score": "100",
+            "score": "101",
+            "winner": false
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "10",
+              "displayName": "Houston Rockets",
+              "abbreviation": "HOU",
+              "name": "Rockets",
+              "location": "Houston",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/hou.png",
+              "color": "ce1141"
+            },
+            "score": "105",
             "winner": true
           }
         ]
@@ -64,13 +67,13 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705352",
-    "date": "2025-02-21T00:00Z",
-    "name": "Memphis Grizzlies at Indiana Pacers",
-    "shortName": "MEM @ IND",
+    "id": "401810648",
+    "date": "2026-02-20T00:00Z",
+    "name": "Brooklyn Nets at Cleveland Cavaliers",
+    "shortName": "BKN @ CLE",
     "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
+      "clock": 720.0,
+      "displayClock": "12:00",
       "period": 4,
       "type": {
         "id": "3",
@@ -84,41 +87,44 @@ export const mockEspnResponse = [
     },
     "competitions": [
       {
-        "id": "401705352",
-        "date": "2025-02-21T00:00Z",
-        "attendance": 17274,
+        "id": "401810648",
+        "date": "2026-02-20T00:00Z",
+        "attendance": 19432,
         "venue": {
-          "id": "5765",
-          "fullName": "Gainbridge Fieldhouse",
-          "address": { "city": "Indianapolis", "state": "IN" }
+          "id": "3417",
+          "fullName": "Rocket Arena",
+          "address": {
+            "city": "Cleveland",
+            "state": "OH"
+          }
         },
         "competitors": [
           {
             "homeAway": "home",
             "team": {
-              "id": "11",
-              "displayName": "Indiana Pacers",
-              "abbreviation": "IND",
-              "name": "Pacers",
-              "location": "Indiana",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/ind.png",
-              "color": "002d62"
+              "id": "5",
+              "displayName": "Cleveland Cavaliers",
+              "abbreviation": "CLE",
+              "name": "Cavaliers",
+              "location": "Cleveland",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cle.png",
+              "color": "860038"
             },
-            "score": "127",
+            "score": "112",
             "winner": true
           },
           {
             "homeAway": "away",
             "team": {
-              "id": "29",
-              "displayName": "Memphis Grizzlies",
-              "abbreviation": "MEM",
-              "name": "Grizzlies",
-              "location": "Memphis",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/mem.png",
-              "color": "5d76a9"
+              "id": "17",
+              "displayName": "Brooklyn Nets",
+              "abbreviation": "BKN",
+              "name": "Nets",
+              "location": "Brooklyn",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/bkn.png",
+              "color": "000000"
             },
-            "score": "113",
+            "score": "84",
             "winner": false
           }
         ]
@@ -126,13 +132,13 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705353",
-    "date": "2025-02-21T00:00Z",
-    "name": "Boston Celtics at Philadelphia 76ers",
-    "shortName": "BOS @ PHI",
+    "id": "401810649",
+    "date": "2026-02-20T00:00Z",
+    "name": "Atlanta Hawks at Philadelphia 76ers",
+    "shortName": "ATL @ PHI",
     "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
+      "clock": 720.0,
+      "displayClock": "12:00",
       "period": 4,
       "type": {
         "id": "3",
@@ -146,13 +152,16 @@ export const mockEspnResponse = [
     },
     "competitions": [
       {
-        "id": "401705353",
-        "date": "2025-02-21T00:00Z",
-        "attendance": 20610,
+        "id": "401810649",
+        "date": "2026-02-20T00:00Z",
+        "attendance": 19746,
         "venue": {
-          "id": "1863",
-          "fullName": "Wells Fargo Center",
-          "address": { "city": "Philadelphia", "state": "PA" }
+          "id": "1845",
+          "fullName": "Xfinity Mobile Arena",
+          "address": {
+            "city": "Philadelphia",
+            "state": "PA"
+          }
         },
         "competitors": [
           {
@@ -164,23 +173,23 @@ export const mockEspnResponse = [
               "name": "76ers",
               "location": "Philadelphia",
               "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/phi.png",
-              "color": "006bb6"
+              "color": "1d428a"
             },
-            "score": "104",
+            "score": "107",
             "winner": false
           },
           {
             "homeAway": "away",
             "team": {
-              "id": "2",
-              "displayName": "Boston Celtics",
-              "abbreviation": "BOS",
-              "name": "Celtics",
-              "location": "Boston",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/bos.png",
-              "color": "007a33"
+              "id": "1",
+              "displayName": "Atlanta Hawks",
+              "abbreviation": "ATL",
+              "name": "Hawks",
+              "location": "Atlanta",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/atl.png",
+              "color": "c8102e"
             },
-            "score": "124",
+            "score": "117",
             "winner": true
           }
         ]
@@ -188,10 +197,140 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705357",
-    "date": "2025-02-21T00:30Z",
-    "name": "Cleveland Cavaliers at Brooklyn Nets",
-    "shortName": "CLE @ BKN",
+    "id": "401810650",
+    "date": "2026-02-20T00:00Z",
+    "name": "Indiana Pacers at Washington Wizards",
+    "shortName": "IND @ WSH",
+    "status": {
+      "clock": 720.0,
+      "displayClock": "12:00",
+      "period": 4,
+      "type": {
+        "id": "3",
+        "name": "STATUS_FINAL",
+        "state": "post",
+        "completed": true,
+        "description": "Final",
+        "detail": "Final",
+        "shortDetail": "Final"
+      }
+    },
+    "competitions": [
+      {
+        "id": "401810650",
+        "date": "2026-02-20T00:00Z",
+        "attendance": 14602,
+        "venue": {
+          "id": "1823",
+          "fullName": "Capital One Arena",
+          "address": {
+            "city": "Washington",
+            "state": "DC"
+          }
+        },
+        "competitors": [
+          {
+            "homeAway": "home",
+            "team": {
+              "id": "27",
+              "displayName": "Washington Wizards",
+              "abbreviation": "WSH",
+              "name": "Wizards",
+              "location": "Washington",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/wsh.png",
+              "color": "e31837"
+            },
+            "score": "112",
+            "winner": true
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "11",
+              "displayName": "Indiana Pacers",
+              "abbreviation": "IND",
+              "name": "Pacers",
+              "location": "Indiana",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/ind.png",
+              "color": "0c2340"
+            },
+            "score": "105",
+            "winner": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "401810651",
+    "date": "2026-02-20T00:30Z",
+    "name": "Detroit Pistons at New York Knicks",
+    "shortName": "DET @ NY",
+    "status": {
+      "clock": 720.0,
+      "displayClock": "12:00",
+      "period": 4,
+      "type": {
+        "id": "3",
+        "name": "STATUS_FINAL",
+        "state": "post",
+        "completed": true,
+        "description": "Final",
+        "detail": "Final",
+        "shortDetail": "Final"
+      }
+    },
+    "competitions": [
+      {
+        "id": "401810651",
+        "date": "2026-02-20T00:30Z",
+        "attendance": 19812,
+        "venue": {
+          "id": "1830",
+          "fullName": "Madison Square Garden",
+          "address": {
+            "city": "New York",
+            "state": "NY"
+          }
+        },
+        "competitors": [
+          {
+            "homeAway": "home",
+            "team": {
+              "id": "18",
+              "displayName": "New York Knicks",
+              "abbreviation": "NY",
+              "name": "Knicks",
+              "location": "New York",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/ny.png",
+              "color": "1d428a"
+            },
+            "score": "111",
+            "winner": false
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "8",
+              "displayName": "Detroit Pistons",
+              "abbreviation": "DET",
+              "name": "Pistons",
+              "location": "Detroit",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/det.png",
+              "color": "1d428a"
+            },
+            "score": "126",
+            "winner": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "401810654",
+    "date": "2026-02-20T03:00Z",
+    "name": "Boston Celtics at Golden State Warriors",
+    "shortName": "BOS @ GS",
     "status": {
       "clock": 0.0,
       "displayClock": "0.0",
@@ -208,27 +347,160 @@ export const mockEspnResponse = [
     },
     "competitions": [
       {
-        "id": "401705357",
-        "date": "2025-02-21T00:30Z",
-        "attendance": 17926,
+        "id": "401810654",
+        "date": "2026-02-20T03:00Z",
+        "attendance": 18064,
         "venue": {
-          "id": "3559",
-          "fullName": "Barclays Center",
-          "address": { "city": "Brooklyn", "state": "NY" }
+          "id": "6270",
+          "fullName": "Chase Center",
+          "address": {
+            "city": "San Francisco",
+            "state": "CA"
+          }
         },
         "competitors": [
           {
             "homeAway": "home",
             "team": {
-              "id": "17",
-              "displayName": "Brooklyn Nets",
-              "abbreviation": "BKN",
-              "name": "Nets",
-              "location": "Brooklyn",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/bkn.png",
-              "color": "000000"
+              "id": "9",
+              "displayName": "Golden State Warriors",
+              "abbreviation": "GS",
+              "name": "Warriors",
+              "location": "Golden State",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/gs.png",
+              "color": "fdb927"
             },
-            "score": "97",
+            "score": "110",
+            "winner": false
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "2",
+              "displayName": "Boston Celtics",
+              "abbreviation": "BOS",
+              "name": "Celtics",
+              "location": "Boston",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/bos.png",
+              "color": "008348"
+            },
+            "score": "121",
+            "winner": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "401810656",
+    "date": "2026-02-20T03:30Z",
+    "name": "Denver Nuggets at LA Clippers",
+    "shortName": "DEN @ LAC",
+    "status": {
+      "clock": 362.0,
+      "displayClock": "6:02",
+      "period": 4,
+      "type": {
+        "id": "2",
+        "name": "STATUS_IN_PROGRESS",
+        "state": "in",
+        "completed": false,
+        "description": "In Progress",
+        "detail": "6:02 - 4th Quarter",
+        "shortDetail": "6:02 - 4th"
+      }
+    },
+    "competitions": [
+      {
+        "id": "401810656",
+        "date": "2026-02-20T03:30Z",
+        "attendance": 17927,
+        "venue": {
+          "id": "10642",
+          "fullName": "Intuit Dome",
+          "address": {
+            "city": "Inglewood",
+            "state": "CA"
+          }
+        },
+        "competitors": [
+          {
+            "homeAway": "home",
+            "team": {
+              "id": "12",
+              "displayName": "LA Clippers",
+              "abbreviation": "LAC",
+              "name": "Clippers",
+              "location": "LA",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/lac.png",
+              "color": "12173f"
+            },
+            "score": "90",
+            "winner": false
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "7",
+              "displayName": "Denver Nuggets",
+              "abbreviation": "DEN",
+              "name": "Nuggets",
+              "location": "Denver",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/den.png",
+              "color": "0e2240"
+            },
+            "score": "94",
+            "winner": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "401810657",
+    "date": "2026-02-21T00:00Z",
+    "name": "Cleveland Cavaliers at Charlotte Hornets",
+    "shortName": "CLE @ CHA",
+    "status": {
+      "clock": 0.0,
+      "displayClock": "0.0",
+      "period": 0,
+      "type": {
+        "id": "1",
+        "name": "STATUS_SCHEDULED",
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled",
+        "detail": "Fri, February 20th at 7:00 PM EST",
+        "shortDetail": "2/20 - 7:00 PM EST"
+      }
+    },
+    "competitions": [
+      {
+        "id": "401810657",
+        "date": "2026-02-21T00:00Z",
+        "attendance": 0,
+        "venue": {
+          "id": "1893",
+          "fullName": "Spectrum Center",
+          "address": {
+            "city": "Charlotte",
+            "state": "NC"
+          }
+        },
+        "competitors": [
+          {
+            "homeAway": "home",
+            "team": {
+              "id": "30",
+              "displayName": "Charlotte Hornets",
+              "abbreviation": "CHA",
+              "name": "Hornets",
+              "location": "Charlotte",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cha.png",
+              "color": "008ca8"
+            },
+            "score": "0",
             "winner": false
           },
           {
@@ -242,69 +514,7 @@ export const mockEspnResponse = [
               "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cle.png",
               "color": "860038"
             },
-            "score": "110",
-            "winner": true
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "401705360",
-    "date": "2025-02-21T02:00Z",
-    "name": "Charlotte Hornets at Denver Nuggets",
-    "shortName": "CHA @ DEN",
-    "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
-      "period": 4,
-      "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
-      }
-    },
-    "competitions": [
-      {
-        "id": "401705360",
-        "date": "2025-02-21T02:00Z",
-        "attendance": 19870,
-        "venue": {
-          "id": "892",
-          "fullName": "Ball Arena",
-          "address": { "city": "Denver", "state": "CO" }
-        },
-        "competitors": [
-          {
-            "homeAway": "home",
-            "team": {
-              "id": "7",
-              "displayName": "Denver Nuggets",
-              "abbreviation": "DEN",
-              "name": "Nuggets",
-              "location": "Denver",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/den.png",
-              "color": "0e2240"
-            },
-            "score": "129",
-            "winner": true
-          },
-          {
-            "homeAway": "away",
-            "team": {
-              "id": "30",
-              "displayName": "Charlotte Hornets",
-              "abbreviation": "CHA",
-              "name": "Hornets",
-              "location": "Charlotte",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cha.png",
-              "color": "008ca8"
-            },
-            "score": "115",
+            "score": "0",
             "winner": false
           }
         ]
@@ -312,61 +522,64 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705367",
-    "date": "2025-02-22T02:30Z",
-    "name": "Minnesota Timberwolves at Houston Rockets",
-    "shortName": "MIN @ HOU",
+    "id": "401810659",
+    "date": "2026-02-21T00:00Z",
+    "name": "Utah Jazz at Memphis Grizzlies",
+    "shortName": "UTAH @ MEM",
     "status": {
       "clock": 0.0,
       "displayClock": "0.0",
-      "period": 4,
+      "period": 0,
       "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
+        "id": "1",
+        "name": "STATUS_SCHEDULED",
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled",
+        "detail": "Fri, February 20th at 7:00 PM EST",
+        "shortDetail": "2/20 - 7:00 PM EST"
       }
     },
     "competitions": [
       {
-        "id": "401705367",
-        "date": "2025-02-22T02:30Z",
-        "attendance": 18055,
+        "id": "401810659",
+        "date": "2026-02-21T00:00Z",
+        "attendance": 0,
         "venue": {
-          "id": "1394",
-          "fullName": "Toyota Center (Houston)",
-          "address": { "city": "Houston", "state": "TX" }
+          "id": "1392",
+          "fullName": "FedExForum",
+          "address": {
+            "city": "Memphis",
+            "state": "TN"
+          }
         },
         "competitors": [
           {
             "homeAway": "home",
             "team": {
-              "id": "10",
-              "displayName": "Houston Rockets",
-              "abbreviation": "HOU",
-              "name": "Rockets",
-              "location": "Houston",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/hou.png",
-              "color": "ce1141"
+              "id": "29",
+              "displayName": "Memphis Grizzlies",
+              "abbreviation": "MEM",
+              "name": "Grizzlies",
+              "location": "Memphis",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/mem.png",
+              "color": "5d76a9"
             },
-            "score": "121",
-            "winner": true
+            "score": "0",
+            "winner": false
           },
           {
             "homeAway": "away",
             "team": {
-              "id": "16",
-              "displayName": "Minnesota Timberwolves",
-              "abbreviation": "MIN",
-              "name": "Timberwolves",
-              "location": "Minnesota",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/min.png",
-              "color": "266092"
+              "id": "26",
+              "displayName": "Utah Jazz",
+              "abbreviation": "UTAH",
+              "name": "Jazz",
+              "location": "Utah",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/utah.png",
+              "color": "4e008e"
             },
-            "score": "115",
+            "score": "0",
             "winner": false
           }
         ]
@@ -374,172 +587,51 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705371",
-    "date": "2025-02-22T03:00Z",
-    "name": "Golden State Warriors at Sacramento Kings",
-    "shortName": "GS @ SAC",
+    "id": "401810660",
+    "date": "2026-02-21T00:30Z",
+    "name": "Miami Heat at Atlanta Hawks",
+    "shortName": "MIA @ ATL",
     "status": {
       "clock": 0.0,
       "displayClock": "0.0",
-      "period": 4,
+      "period": 0,
       "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
+        "id": "1",
+        "name": "STATUS_SCHEDULED",
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled",
+        "detail": "Fri, February 20th at 7:30 PM EST",
+        "shortDetail": "2/20 - 7:30 PM EST"
       }
     },
     "competitions": [
       {
-        "id": "401705371",
-        "date": "2025-02-22T03:00Z",
-        "attendance": 18098,
+        "id": "401810660",
+        "date": "2026-02-21T00:30Z",
+        "attendance": 0,
         "venue": {
-          "id": "5310",
-          "fullName": "Golden 1 Center",
-          "address": { "city": "Sacramento", "state": "CA" }
-        },
-        "competitors": [
-          {
-            "homeAway": "home",
-            "team": {
-              "id": "23",
-              "displayName": "Sacramento Kings",
-              "abbreviation": "SAC",
-              "name": "Kings",
-              "location": "Sacramento",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/sac.png",
-              "color": "5a2d81"
-            },
-            "score": "108",
-            "winner": false
-          },
-          {
-            "homeAway": "away",
-            "team": {
-              "id": "9",
-              "displayName": "Golden State Warriors",
-              "abbreviation": "GS",
-              "name": "Warriors",
-              "location": "Golden State",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/gs.png",
-              "color": "fdb927"
-            },
-            "score": "132",
-            "winner": true
+          "id": "1827",
+          "fullName": "State Farm Arena",
+          "address": {
+            "city": "Atlanta",
+            "state": "GA"
           }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "401705378",
-    "date": "2025-02-23T20:30Z",
-    "name": "Dallas Mavericks at Golden State Warriors",
-    "shortName": "DAL @ GS",
-    "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
-      "period": 4,
-      "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
-      }
-    },
-    "competitions": [
-      {
-        "id": "401705378",
-        "date": "2025-02-23T20:30Z",
-        "attendance": 18064,
-        "venue": {
-          "id": "6270",
-          "fullName": "Chase Center",
-          "address": { "city": "San Francisco", "state": "CA" }
         },
         "competitors": [
           {
             "homeAway": "home",
             "team": {
-              "id": "9",
-              "displayName": "Golden State Warriors",
-              "abbreviation": "GS",
-              "name": "Warriors",
-              "location": "Golden State",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/gs.png",
-              "color": "fdb927"
+              "id": "1",
+              "displayName": "Atlanta Hawks",
+              "abbreviation": "ATL",
+              "name": "Hawks",
+              "location": "Atlanta",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/atl.png",
+              "color": "c8102e"
             },
-            "score": "126",
-            "winner": true
-          },
-          {
-            "homeAway": "away",
-            "team": {
-              "id": "6",
-              "displayName": "Dallas Mavericks",
-              "abbreviation": "DAL",
-              "name": "Mavericks",
-              "location": "Dallas",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/dal.png",
-              "color": "0064b1"
-            },
-            "score": "102",
+            "score": "0",
             "winner": false
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "401705383",
-    "date": "2025-02-23T23:00Z",
-    "name": "Miami Heat at Milwaukee Bucks",
-    "shortName": "MIA @ MIL",
-    "status": {
-      "clock": 0.0,
-      "displayClock": "0.0",
-      "period": 4,
-      "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
-      }
-    },
-    "competitions": [
-      {
-        "id": "401705383",
-        "date": "2025-02-23T23:00Z",
-        "attendance": 17442,
-        "venue": {
-          "id": "5777",
-          "fullName": "Fiserv Forum",
-          "address": { "city": "Milwaukee", "state": "WI" }
-        },
-        "competitors": [
-          {
-            "homeAway": "home",
-            "team": {
-              "id": "15",
-              "displayName": "Milwaukee Bucks",
-              "abbreviation": "MIL",
-              "name": "Bucks",
-              "location": "Milwaukee",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/mil.png",
-              "color": "00471b"
-            },
-            "score": "120",
-            "winner": true
           },
           {
             "homeAway": "away",
@@ -552,7 +644,7 @@ export const mockEspnResponse = [
               "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/mia.png",
               "color": "98002e"
             },
-            "score": "113",
+            "score": "0",
             "winner": false
           }
         ]
@@ -560,61 +652,129 @@ export const mockEspnResponse = [
     ]
   },
   {
-    "id": "401705400",
-    "date": "2025-02-26T03:00Z",
-    "name": "Charlotte Hornets at Golden State Warriors",
-    "shortName": "CHA @ GS",
+    "id": "401810661",
+    "date": "2026-02-21T00:30Z",
+    "name": "Dallas Mavericks at Minnesota Timberwolves",
+    "shortName": "DAL @ MIN",
     "status": {
       "clock": 0.0,
       "displayClock": "0.0",
-      "period": 4,
+      "period": 0,
       "type": {
-        "id": "3",
-        "name": "STATUS_FINAL",
-        "state": "post",
-        "completed": true,
-        "description": "Final",
-        "detail": "Final",
-        "shortDetail": "Final"
+        "id": "1",
+        "name": "STATUS_SCHEDULED",
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled",
+        "detail": "Fri, February 20th at 7:30 PM EST",
+        "shortDetail": "2/20 - 7:30 PM EST"
       }
     },
     "competitions": [
       {
-        "id": "401705400",
-        "date": "2025-02-26T03:00Z",
-        "attendance": 18064,
+        "id": "401810661",
+        "date": "2026-02-21T00:30Z",
+        "attendance": 0,
         "venue": {
-          "id": "6270",
-          "fullName": "Chase Center",
-          "address": { "city": "San Francisco", "state": "CA" }
+          "id": "2029",
+          "fullName": "Target Center",
+          "address": {
+            "city": "Minneapolis",
+            "state": "MN"
+          }
         },
         "competitors": [
           {
             "homeAway": "home",
             "team": {
-              "id": "9",
-              "displayName": "Golden State Warriors",
-              "abbreviation": "GS",
-              "name": "Warriors",
-              "location": "Golden State",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/gs.png",
-              "color": "fdb927"
+              "id": "16",
+              "displayName": "Minnesota Timberwolves",
+              "abbreviation": "MIN",
+              "name": "Timberwolves",
+              "location": "Minnesota",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/min.png",
+              "color": "266092"
             },
-            "score": "128",
-            "winner": true
+            "score": "0",
+            "winner": false
           },
           {
             "homeAway": "away",
             "team": {
-              "id": "30",
-              "displayName": "Charlotte Hornets",
-              "abbreviation": "CHA",
-              "name": "Hornets",
-              "location": "Charlotte",
-              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cha.png",
-              "color": "008ca8"
+              "id": "6",
+              "displayName": "Dallas Mavericks",
+              "abbreviation": "DAL",
+              "name": "Mavericks",
+              "location": "Dallas",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/dal.png",
+              "color": "0064b1"
             },
-            "score": "92",
+            "score": "0",
+            "winner": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "401810662",
+    "date": "2026-02-21T01:00Z",
+    "name": "Milwaukee Bucks at New Orleans Pelicans",
+    "shortName": "MIL @ NO",
+    "status": {
+      "clock": 0.0,
+      "displayClock": "0.0",
+      "period": 0,
+      "type": {
+        "id": "1",
+        "name": "STATUS_SCHEDULED",
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled",
+        "detail": "Fri, February 20th at 8:00 PM EST",
+        "shortDetail": "2/20 - 8:00 PM EST"
+      }
+    },
+    "competitions": [
+      {
+        "id": "401810662",
+        "date": "2026-02-21T01:00Z",
+        "attendance": 0,
+        "venue": {
+          "id": "985",
+          "fullName": "Smoothie King Center",
+          "address": {
+            "city": "New Orleans",
+            "state": "LA"
+          }
+        },
+        "competitors": [
+          {
+            "homeAway": "home",
+            "team": {
+              "id": "3",
+              "displayName": "New Orleans Pelicans",
+              "abbreviation": "NO",
+              "name": "Pelicans",
+              "location": "New Orleans",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/no.png",
+              "color": "0a2240"
+            },
+            "score": "0",
+            "winner": false
+          },
+          {
+            "homeAway": "away",
+            "team": {
+              "id": "15",
+              "displayName": "Milwaukee Bucks",
+              "abbreviation": "MIL",
+              "name": "Bucks",
+              "location": "Milwaukee",
+              "logo": "https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/mil.png",
+              "color": "00471b"
+            },
+            "score": "0",
             "winner": false
           }
         ]

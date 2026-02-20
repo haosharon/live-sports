@@ -62,7 +62,7 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
   const timeLabel = getLocalTimeLabel(game.gameTime);
   const awayAbbr = getTeamAbbreviation(game.awayTeam);
   const homeAbbr = getTeamAbbreviation(game.homeTeam);
-  const divergencePercent = (game.maxDivergence * 100).toFixed(1);
+  const divergencePercent = ((game.divergence?.max ?? 0) * 100).toFixed(1);
 
   return (
     <div className="space-y-4 px-4 pb-8">
@@ -113,14 +113,14 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
         <div className="flex items-center justify-between border-b border-zinc-800 py-3">
           <div className="flex items-center gap-2">
             <span className="font-bold text-white">{awayAbbr}</span>
-            {game.vegasAwayOdds > 0 && (
+            {game.vegasOdds && game.vegasOdds.awayOdds > 0 && (
               <span className="rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
-                {decimalToAmerican(game.vegasAwayOdds)}
+                {decimalToAmerican(game.vegasOdds.awayOdds)}
               </span>
             )}
           </div>
           <span className="text-xl font-mono text-white">
-            {formatProbability(game.vegasAwayProbability)}
+            {formatProbability(game.vegasOdds?.awayProbability ?? 0)}
           </span>
         </div>
 
@@ -128,14 +128,14 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
         <div className="flex items-center justify-between py-3">
           <div className="flex items-center gap-2">
             <span className="font-bold text-white">{homeAbbr}</span>
-            {game.vegasHomeOdds > 0 && (
+            {game.vegasOdds && game.vegasOdds.homeOdds > 0 && (
               <span className="rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
-                {decimalToAmerican(game.vegasHomeOdds)}
+                {decimalToAmerican(game.vegasOdds.homeOdds)}
               </span>
             )}
           </div>
           <span className="text-xl font-mono text-white">
-            {formatProbability(game.vegasHomeProbability)}
+            {formatProbability(game.vegasOdds?.homeProbability ?? 0)}
           </span>
         </div>
       </div>
@@ -160,10 +160,10 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
           <div className="flex items-center justify-between">
             <span className="font-bold text-white">{awayAbbr}</span>
             <span className="font-mono text-purple-400">
-              {formatProbability(game.polymarketAwayProbability)}
+              {formatProbability(game.crowdOdds?.awayProbability ?? 0)}
             </span>
           </div>
-          <ProbabilityBar probability={game.polymarketAwayProbability} color="#a855f7" />
+          <ProbabilityBar probability={game.crowdOdds?.awayProbability ?? 0} color="#a855f7" />
         </div>
 
         {/* Home team */}
@@ -171,10 +171,10 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
           <div className="flex items-center justify-between">
             <span className="font-bold text-white">{homeAbbr}</span>
             <span className="font-mono text-purple-400">
-              {formatProbability(game.polymarketHomeProbability)}
+              {formatProbability(game.crowdOdds?.homeProbability ?? 0)}
             </span>
           </div>
-          <ProbabilityBar probability={game.polymarketHomeProbability} color="#a855f7" />
+          <ProbabilityBar probability={game.crowdOdds?.homeProbability ?? 0} color="#a855f7" />
         </div>
       </div>
 
@@ -188,24 +188,24 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
           <div className="space-y-1.5">
             <div className="flex items-center gap-3">
               <span className="w-12 text-right text-xs font-mono text-zinc-400">
-                {formatProbability(game.vegasAwayProbability)}
+                {formatProbability(game.vegasOdds?.awayProbability ?? 0)}
               </span>
               <div className="flex-1">
                 <div
                   className="h-2.5 rounded-full bg-purple-600"
-                  style={{ width: `${game.vegasAwayProbability * 100}%` }}
+                  style={{ width: `${(game.vegasOdds?.awayProbability ?? 0) * 100}%` }}
                 />
               </div>
               <span className="w-12 text-xs text-zinc-500">Vegas</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="w-12 text-right text-xs font-mono text-zinc-400">
-                {formatProbability(game.polymarketAwayProbability)}
+                {formatProbability(game.crowdOdds?.awayProbability ?? 0)}
               </span>
               <div className="flex-1">
                 <div
                   className="h-2.5 rounded-full bg-purple-500"
-                  style={{ width: `${game.polymarketAwayProbability * 100}%` }}
+                  style={{ width: `${(game.crowdOdds?.awayProbability ?? 0) * 100}%` }}
                 />
               </div>
               <span className="w-12 text-xs text-zinc-500">Crowd</span>
@@ -219,24 +219,24 @@ export default function GameDetailView({ game }: GameDetailViewProps) {
           <div className="space-y-1.5">
             <div className="flex items-center gap-3">
               <span className="w-12 text-right text-xs font-mono text-zinc-400">
-                {formatProbability(game.vegasHomeProbability)}
+                {formatProbability(game.vegasOdds?.homeProbability ?? 0)}
               </span>
               <div className="flex-1">
                 <div
                   className="h-2.5 rounded-full bg-purple-600"
-                  style={{ width: `${game.vegasHomeProbability * 100}%` }}
+                  style={{ width: `${(game.vegasOdds?.homeProbability ?? 0) * 100}%` }}
                 />
               </div>
               <span className="w-12 text-xs text-zinc-500">Vegas</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="w-12 text-right text-xs font-mono text-zinc-400">
-                {formatProbability(game.polymarketHomeProbability)}
+                {formatProbability(game.crowdOdds?.homeProbability ?? 0)}
               </span>
               <div className="flex-1">
                 <div
                   className="h-2.5 rounded-full bg-purple-500"
-                  style={{ width: `${game.polymarketHomeProbability * 100}%` }}
+                  style={{ width: `${(game.crowdOdds?.homeProbability ?? 0) * 100}%` }}
                 />
               </div>
               <span className="w-12 text-xs text-zinc-500">Crowd</span>

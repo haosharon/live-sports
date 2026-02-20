@@ -19,10 +19,8 @@ describe('Mock Games Data', () => {
     expect(game).toHaveProperty('statusState');
     expect(game).toHaveProperty('venue');
 
-    // Enrichment fields
-    expect(game).toHaveProperty('vegasHomeProbability');
-    expect(game).toHaveProperty('polymarketHomeProbability');
-    expect(game).toHaveProperty('maxDivergence');
+    // Enrichment fields are optional nested objects
+    // vegasOdds, crowdOdds, divergence may be undefined
   });
 
   test('all games should have sport set to NBA', () => {
@@ -31,22 +29,27 @@ describe('Mock Games Data', () => {
     });
   });
 
-  test('enrichment fields should be 0 when no matching data source exists', () => {
-    // Games without Odds API or Polymarket matches should have 0 for enrichment fields
+  test('enrichment fields should have valid probabilities when present', () => {
     mockGames.forEach(game => {
-      expect(game.vegasHomeProbability).toBeGreaterThanOrEqual(0);
-      expect(game.vegasAwayProbability).toBeGreaterThanOrEqual(0);
-      expect(game.polymarketHomeProbability).toBeGreaterThanOrEqual(0);
-      expect(game.polymarketAwayProbability).toBeGreaterThanOrEqual(0);
+      if (game.vegasOdds) {
+        expect(game.vegasOdds.homeProbability).toBeGreaterThanOrEqual(0);
+        expect(game.vegasOdds.awayProbability).toBeGreaterThanOrEqual(0);
+      }
+      if (game.crowdOdds) {
+        expect(game.crowdOdds.homeProbability).toBeGreaterThanOrEqual(0);
+        expect(game.crowdOdds.awayProbability).toBeGreaterThanOrEqual(0);
+      }
     });
   });
 
-  test('divergence should only be non-zero when both sources are present', () => {
+  test('divergence should only exist when both sources are present', () => {
     mockGames.forEach(game => {
-      if (game.vegasHomeProbability === 0 || game.polymarketHomeProbability === 0) {
-        expect(game.homeDivergence).toBe(0);
-        expect(game.awayDivergence).toBe(0);
-        expect(game.maxDivergence).toBe(0);
+      if (!game.vegasOdds || !game.crowdOdds) {
+        expect(game.divergence).toBeUndefined();
+      }
+      if (game.divergence) {
+        expect(game.vegasOdds).toBeDefined();
+        expect(game.crowdOdds).toBeDefined();
       }
     });
   });

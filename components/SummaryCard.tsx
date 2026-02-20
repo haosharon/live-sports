@@ -7,7 +7,7 @@ interface SummaryCardProps {
 }
 
 export default function SummaryCard({ games }: SummaryCardProps) {
-  const gamesWithEdges = games.filter(g => g.maxDivergence >= DIVERGENCE_GAP_THRESHOLD).length;
+  const gamesWithEdges = games.filter(g => (g.divergence?.max ?? 0) >= DIVERGENCE_GAP_THRESHOLD).length;
   const totalGames = games.length;
   const progress = totalGames > 0 ? (gamesWithEdges / totalGames) * 100 : 0;
 
